@@ -1,0 +1,70 @@
+The Foreach statement (also known as a Foreach loop) is a language construct
+for stepping through (ierating a series of values in a collection of items.  
+
+The simplest and most typical of collectioin to traverse is an array.  Within a 
+Foreach loop, it is common to run one or more commands against each item in an array 
+
+foreach ($<item> in $<collection>){<statement list>}
+
+The part of the ForEach statement enclosed in parenthesis represents a variable
+and a collection to iterate.  PS creates the variable $<item> automatically
+when the Foreach loop runs.  
+
+#############################IMPORTANT###################################################
+## This $<item> by default is set to first item in the array.  If there is another#######  
+## variable with the same name as the $<item> variable, then the previous variable####### 
+## will be destroyed and the $<item> variable value will default to the first item in####
+## the array.  After $<item> variable has run through it's array it will default value### 
+## to the last value in the array. ###################################################### 
+#########################################################################################
+
+Prior to each iteration through the loop, the variable
+is set to a value in the collection.  By default it is the first value, but with statements
+it can likely be set to any I believe.    
+
+The block following a Foreach statement {<statement list>} contains a set of commands
+to execute against each item in a collection
+
+EXAMPLE 1
+H:\> foreach ($letter in $letterArray)
+>> {
+>> write-host $letter
+>> if ($letter -eq "c") {
+>> break
+>> }
+>> }
+a
+b
+c
+
+Our <$item> in this example is $letter. are Array is $letterarray which contains the 
+following.
+
+PS H:\> $letterArray = "a" "b" "c" "d"
+a
+b
+c
+d
+
+We will traverse through the array with are default varible set until we come to a statement
+that causes us to stop.  $letter defaults to A, it is then written on the screen has specified 
+in the statement block.  The next statement in the block is an if statement with comparison operator
+Are statement requires the loop to be broken if the letter equals "C".  Once the loop runs three times
+and gets to C it is broken, And therefore does not completely traverse the loop.  
+
+Things to be carefull of!!!!
+1) you cannot use = as a comparison operator.  This will cause cause the varaible to be given 
+a value.  For instance
+
+PS H:\> foreach ($letter in $letterArray)
+>> {
+>> write-host $letter
+>> if ($letter = "c") {
+>> break
+>> }
+>> }
+
+This will run through the loop once and then come to the if statement defining $letter = "c"
+We are defining $letter to equal "c" and the previous value of the variable $letter which was "a"
+is destroyed.  The new value of the variable $letter is "c".  We then tell the loop to break, 
+causing us to exit the loop.  
